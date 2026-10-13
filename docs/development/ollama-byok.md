@@ -80,6 +80,21 @@ ollama create qwen3-tabtin:8b -f Modelfile.tabtin
 小上下文模型不满足所有辅助场景的最小上下文和输出预算要求。导入不会绕过
 场景能力检查，也不代表支持所有长文档流程。
 
+### 设置正常但聊天显示“无模型”
+
+设置页的连接列表与聊天使用的模型目录分别加载。外部管理命令导入模型后，
+已打开的客户端可能仍保留先前的空目录。先刷新聊天模型目录，或重新加载
+客户端，再新建任务并选择实际导入的模型；不需要重复创建连接。
+若仍无法选择，检查 `/services/llm/catalog?use_case=chat` 的请求结果和客户端
+`ChatModel` 日志，确认当前组织目录包含该模型且路由启用。
+
+### 本地客户端验收记录
+
+2026-10-13：使用已安装 Qwen3 8B 的 4096 上下文别名，用户确认刷新目录后
+Electron 新任务可以选择模型，并提供了发送 `hi` 后收到实际回复的截图。
+这补充了后端代理测试的客户端对话验证；不代表所有 Agent 工具、长文档或
+多轮任务均已通过验收。
+
 参考：[Ollama OpenAI 兼容接口](https://docs.ollama.com/api/openai-compatibility)、
 [Ollama 模型信息](https://docs.ollama.com/api/show)、
 [Docker Desktop 宿主机访问](https://docs.docker.com/desktop/features/networking/networking-how-tos/)。

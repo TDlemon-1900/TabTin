@@ -89,6 +89,24 @@ Small-context models do not satisfy every auxiliary scene's configured minimum
 context or output budget. Importing a model does not bypass scene capability
 checks or imply that all long-document workflows are supported.
 
+### Connection settings work but chat shows no model
+
+The settings connection list and the chat model catalog load separately. After
+an external management command imports a model, an open client may retain its
+previous empty catalog. Refresh the chat model catalog or reload the client,
+then create a task and select the imported model. Do not create duplicate
+connections. If the model remains unavailable, inspect the
+`/services/llm/catalog?use_case=chat` response and client `ChatModel` logs. Verify
+that the current organization's catalog includes the model with routing enabled.
+
+### Local client verification record
+
+2026-10-13: With a 4096-context alias of an installed Qwen3 8B model, the user
+confirmed that refreshing the catalog made the model selectable in an Electron
+task and supplied a screenshot of an actual reply to `hi`. This adds client chat
+verification to the backend proxy tests; it does not establish that every Agent
+tool, long-document workflow, or multi-turn task has passed.
+
 References: [Ollama OpenAI compatibility](https://docs.ollama.com/api/openai-compatibility),
 [Ollama model information](https://docs.ollama.com/api/show),
 [Docker Desktop host networking](https://docs.docker.com/desktop/features/networking/networking-how-tos/).
